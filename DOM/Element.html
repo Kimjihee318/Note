@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <a href="#" title="title" data-foo="dataFoo" class="hi" style=" "></a>
+  <input type="checkbox" name="" id="" checked>
+  <script>
+    function log(d) {
+      return console.log(d);
+    }
+    // a element를 DOM트리 내의 노드 객체로 인스턴스화 하는 생성자
+    log(document.querySelector('a').constructor);
+
+    // element 속성
+    let anchor = document.querySelector('a');
+    log(Object.keys(anchor));
+
+    //element 고유 속성 및 상속 속성
+    let documentPropertiesIncludeInherited = [];
+    for(let p in document) {
+      documentPropertiesIncludeInherited.push(p);
+    }
+    log(documentPropertiesIncludeInherited);
+
+    // NOTE 
+    // createElement
+    // 프로그래밍 적으로 element를 생성한다. 
+    // 1.element 노드를 생성한 뒤
+    // 2.DOM 트리에 해당 노드를 삽입한다.
+    let elementNode = document.createElement('textarea'); // 안에는 태그이름의 문자열이 들어간다.
+    document.body.appendChild(elementNode);
+
+    // tagName = nodeName
+    // element의 이름을 알려준다.
+    log(document.querySelector('a').tagName); // A
+    log(document.querySelector('a').nodeName); // A
+
+    // element Attribute 및 값에 대한 리스트/컬렉션 얻기
+    let atts = document.querySelector('a').attributes;
+    for(let i=0; i< atts.length; i++) {
+      log(atts[i].nodeName+ ',' + atts[i].nodeValue);
+    }
+
+    // NOTE element Attribute 값 획득. 설정. 제거
+    // getAttribute(); setAttribute(); removeAttribute();
+    let attsAtag = document.querySelector('a');
+    let attsInput = document.querySelector('input');
+
+    attsAtag.removeAttribute('href');
+    attsAtag.setAttribute('href', '###');
+    log('after get: '+attsAtag.getAttribute('href'));
+
+    // NOTE 
+    // Attribute 값이 있는지 확인하기
+    log('has href ? ' +attsAtag.hasAttribute('href'));
+    log('input has checked ? ' +attsInput.hasAttribute('checked'));
+
+  </script>
+</body>
+</html>

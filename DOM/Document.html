@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document test</title>
+</head>
+<body>
+  <textarea>포커싱 참조</textarea>
+  <script>
+    function log(d) {
+      return console.log(d);
+    }
+
+    log(window.document.constructor);
+    log(window.document.nodeType);
+    log(Object.keys(document).sort());
+
+    // NOTE
+    // 고유속성 및 상속받은 속성
+    let documentPropertiesIncludeInherited = [];
+    for(let p in document) {
+      documentPropertiesIncludeInherited.push(p);
+    }
+    // log(documentPropertiesIncludeInherited);
+
+    // NOTE
+    // documnet가 상속받은 속성만
+    let documentPropertiesOnlyInherited = [];
+    for(let p in document) {
+      if(!document.hasOwnProperty(p)){
+        documentPropertiesOnlyInherited.push(p);
+      }
+    }
+    // log(documentPropertiesOnlyInherited);
+
+    // NOTE 
+    // document method 알아보기
+    let d = document;
+
+    log(`
+    document 메소드
+    title: ${d.title}
+    url: ${d.URL}
+    referer: ${d.referer}
+    최종 수정일, lastModified: ${d.lastModified}
+    `);
+    
+    for(let i=0; i<d.childNodes.length; i++) {
+      log(`document 자식 노드: 
+        ${i}번째 ${d.childNodes[i]}, 노드타입 ${d.childNodes[i].nodeType}
+        `);
+    }
+
+    // NOTE 
+    // 도큐먼트 메소드 활용
+    log('document.doctype:' +document.doctype);
+    log('document.documentElement:' +document.documentElement);
+    log('document.head:' +document.head);
+    log('document.body:' +document.body);
+
+    // NOTE 
+    // 문서 내에 포커스를 가지고 있거나 활성 상태인 노트 참조
+    d.querySelector('textarea').focus();
+    log('활성 상태인 element 참조:' +d.activeElement); // textArea
+
+
+
+    </script>
+</body>
+</html>
